@@ -1,0 +1,19 @@
+{
+  "name": "nft_node",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "dev": "next",
+    "build": "next build",
+    "start": "next start -p 5000",
+    "app": "node app"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^9.0.2",
+    "express": "^4.17.1",
+    "mongoose": "^5.12.8"
+  }
+}

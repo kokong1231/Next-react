@@ -15,11 +15,6 @@ const signRouter = require('./routes/register');
 var port = 3000;
 
 app.prepare().then(() => {
-  server.get("/usb", (req, res) => {
-    console.log("Main Page Access!!!");
-    return app.render(req, res, "/");
-  });
-
   server.get("*", (req, res) => {
     return handle(req, res);
   });
@@ -27,6 +22,7 @@ app.prepare().then(() => {
   server.listen(port, (err) => {
     if (err) throw err;
     console.log("Node.JS   PORT   >>>   " + port);
+    console.log("Connect HOST   >>>   http://localhost:" + port);
   });
 });
 
@@ -36,7 +32,8 @@ server.use(express.static('public'));
 server.use(express.urlencoded({ extended: true }));
 server.use(express.json());
 
-server.use('/', signRouter);
+server.use('/grocery', signRouter);
+
 
 mongoose
   .connect(MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true })

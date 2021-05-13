@@ -23,6 +23,7 @@ app.prepare().then(() => {
     if (err) throw err;
     console.log("Node.JS   PORT   >>>   " + port);
     console.log("Connect HOST   >>>   http://localhost:" + port);
+    console.log("Connect GraphQL   >>>   http://localhost:4000/shop/graphql");
   });
 });
 

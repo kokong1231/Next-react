@@ -7,7 +7,7 @@
     "build": "next build",
     "start": "next start",
     "app": "node Node-Back/app",
-    "server": "node Node-Back/server"
+    "server": "cross-env NODE_ENV=production node dist/server.shop.js | node Node-Back/server"
   },
   "dependencies": {
     "@apollo/client": "^3.3.15",

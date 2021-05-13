@@ -1,0 +1,26 @@
+{
+  "version": 2,
+  "build": [
+    {
+      "src": "./server.admin.ts",
+      "use": "@now/node-server"
+    },
+    {
+      "src": "./server.shop.ts",
+      "use": "@now/node-server"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/admin/graphql",
+      "dest": "server.admin.ts"
+    },
+    {
+      "src": "/shop/graphql",
+      "dest": "server.shop.ts"
+    }
+  ],
+  "env": {
+    "REACT_APP_API_URL": "https://pickbazar-api.now.sh/admin/graphql"
+  }
+}

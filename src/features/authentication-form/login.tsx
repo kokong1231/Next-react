@@ -19,6 +19,9 @@ import { AuthContext } from 'contexts/auth/auth.context';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { closeModal } from '@redq/reuse-modal';
 import { Input } from 'components/forms/input';
+
+const axios = require('axios');
+
 export default function SignInModal() {
   const intl = useIntl();
   const { authDispatch } = useContext<any>(AuthContext);
@@ -45,6 +48,28 @@ export default function SignInModal() {
     }
   };
 
+  const mongooseLogin = function () {
+    axios({
+      method: 'POST',
+      url: '/grocery/signin',
+      params: {
+        email: email,
+        password: password
+      }
+    }).then((res) => {
+      console.log('axios response success !')
+      if(res.data.success){
+        alert('로그인 성공');
+        console.log(res);
+      }else{
+        alert("이메일 또는 비밀번호가 틀렸습니다.");
+      }
+    }).catch((err) => {
+      throw err;
+    })
+  }
+
+
   return (
     <Wrapper>
       <Container>
@@ -58,33 +83,29 @@ export default function SignInModal() {
             defaultMessage='Login with your email &amp; password'
           />
         </SubHeading>
-        <form onSubmit={loginCallback}>
+        <form onSubmit={mongooseLogin}>
           <Input
             type='email'
-            placeholder={intl.formatMessage({
-              id: 'emailAddressPlaceholder',
-              defaultMessage: 'Email Address.',
-            })}
+            placeholder="E-mail"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             required
             height='48px'
             backgroundColor='#F7F7F7'
             mb='10px'
+            name='email'
           />
 
           <Input
             type='password'
-            placeholder={intl.formatMessage({
-              id: 'passwordPlaceholder',
-              defaultMessage: 'Password (min 6 characters)',
-            })}
+            placeholder="Password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             required
             height='48px'
             backgroundColor='#F7F7F7'
             mb='10px'
+            name='password'
           />
 
           <Button

@@ -5,16 +5,27 @@ const server = express();
 const { User } = require("../models/User");
 
 
-server.post("/reg", (req, res) => {
+
+server.post("*/reg", (req, res) => {
     //회원가입을 할때 필요한것
     //post로 넘어온 데이터를 받아서 DB에 저장해준다
-    const user = new User(req.body);
 
-    console.log("들어옴");
+    console.log(req.query);
+    const user = new User(req.query);
+
+    // 비밀번호 확인 구간
+    const pwCheck = req.query.password === req.query.password_again;
+
+    console.log("MongoDB Access!!");
 
     user.save((err, userInfo) => {
-      if (err) return res.json({ success: false, err });
-      return res.status(200).json({ success: true });
+      if (err || (pwCheck === false)) {
+        console.log("회원가입 실패");
+        return res.json({ success: false });
+      } else {
+        console.log("회원가입 성공");
+        return res.status(200).json({ success: true });
+      }
     });
   });
 

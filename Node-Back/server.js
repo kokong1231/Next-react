@@ -11,6 +11,8 @@ const MONGO_URI = "mongodb+srv://razen:1234@cluster0.r48gi.mongodb.net/myFirstDa
 
 // Router
 const signRouter = require('./routes/register');
+const loginRouter = require('./routes/login');
+
 
 var port = 3000;
 
@@ -33,7 +35,8 @@ server.use(express.static('public'));
 server.use(express.urlencoded({ extended: true }));
 server.use(express.json());
 
-server.use('/grocery', signRouter);
+server.use('/', [signRouter, loginRouter]);
+server.use('/grocery', [signRouter, loginRouter]);
 
 
 mongoose
